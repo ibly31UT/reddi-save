@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#authButton").on("click", function(){
+    window.location.replace("{{ authUrl }}");
+  });
+});
+</script>
+
+<div id="authPanel" class="col-xs-8 col-xs-offset-2">
+  <div class="panel panel-info"> 
+    <div class="panel-heading text-center">
+      <h2>Authorize on Reddit</h2>
+    </div>
+    <div class="panel-body">
+      <p>You are not yet authorized with Reddit. Please authorize by clicking the link.</p>
+      <button id="authButton" class="btn btn-lg btn-success" type="button" role="button">Authorize on Reddit.com</button>
+    </div>
+  </div>
+</div>
+{% endblock %}

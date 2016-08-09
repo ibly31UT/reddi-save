@@ -1,0 +1,56 @@
+<html>
+	<head>
+		<title>{{ title }} - ReddiSave</title>
+		<script src="/static/js/jquery.min.js"></script>
+
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css?nocache=123" rel="stylesheet" media="screen">
+		<link href="/static/css/site.css?q=123" rel="stylesheet">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
+		<script src="/static/js/mousezoom.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script type="text/javascript">
+			function postWithJson(url, data, onSuccess){
+				var settings = {
+					url: url,
+					method: "POST",
+					data: JSON.stringify(data),
+					dataType: "json",
+					contentType: "application/json"
+				};
+				$.ajax(settings).done(onSuccess).fail(function(error){
+					console.log("Error POST with JSON on URL: \"url\"");
+					console.log(error);
+				});	
+			}
+		</script>
+	</head>
+	<body>	
+		<div class="container">
+			<nav class="navbar navbar-dark bg-inverse">
+				<a class="navbar-brand" href="#">ReddiSave</a>	
+				<ul class="nav navbar-nav">
+					<li class="nav-item active">
+						<a class="nav-link" href="#">Home</a>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav pull-xs-right">
+					{% if user is defined %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ user._url }}">Logged in as <strong>{{ user.name }}</strong></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/deauth">Logout</a>
+						</li>
+					{% else %}
+						<li class="nav-item">
+							<a class="nav-link" href="#">You are not signed in</a>
+						</li>
+					{% endif %}
+				</ul>
+			</nav>
+		</div>
+		<div id="content" class="container">
+		{% block content%}{% endblock %}
+		</div>
+	</body>
+</html>

@@ -1,0 +1,69 @@
+{% if postawerqwer is defined %}
+<table class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <td style="width:10%">Upvotes</td>
+            <td style="width:35%">Link</td>
+            <td style="width:35%">Comments</td>
+            <td style="width:20%">Domain</td>
+        </tr>
+    </thead>
+    <tbody>
+    {% for post in posts %}
+        <tr class="postRow">
+            <td><span id="ups">{{ post.ups }}</span></td>
+            <td>
+                <a href="{% if post.url is defined %}{{ post.url }}{% endif %}">
+                    <span id="title">{{ post.title }}</span>
+                </a>
+            </td>
+            <td>
+                <a href="https://www.reddit.com{{ post.permalink }}">
+                    <strong>Comments ( {{ post.num_comments }} )</strong>
+                </a>
+            </td>
+            <td>
+                <a href="{{ post.domain }}">
+                    <span id="domain">{{ post.domain }}</span>
+                </a>
+            </td>
+        </tr>
+    </tbody>
+    {% endfor %}
+</table>
+    {% endif %}
+    {% for post in posts %}
+        <div class="row post-row" 
+            data-id="{{ post.id }}" 
+            data-vote="{% if post.likes %}1{% else %}0{% endif %}">
+            <div class="col-xs-12">
+                <div class="card text-xs-center">
+                    <div class="card-header text-muted">
+                        <span class="ups col-xs-1">&#9650;{{ post.score }}</span>
+                        <a href="https://www.reddit.com{{ post.permalink }}" class="col-xs-10">
+                            Comments ({{ post.num_comments }})
+                        </a>
+                        <span class="col-xs-1">
+                            <a href="#post{{ post.id }}" data-toggle="collapse">&#9776;</a>
+                        </span>
+                    </div>
+                    <div class="card-block collapse" id="post{{ post.id }}">
+                        <h4 class="card-title">
+                            <a href="{% if post.url is defined %}{{ post.url }}{% endif %}">
+                                {{ post.title }}
+                            </a>
+                        </h4>
+                        {% if post.preview is defined %}
+                        <img class="card-img-bottom" src="{{ post.preview.images[0].source.url }}">
+                        {% endif %}
+                    </div>
+                    <div class="card-footer">
+                        <a class="post-title" href="{% if post.url is defined %}{{ post.url }}{% endif %}">
+                            <span id="title">{{ post.title }}</span>
+                        </a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}

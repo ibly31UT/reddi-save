@@ -1,0 +1,76 @@
+{% extends "base.html" %} {% block content %}
+<script type="text/javascript">
+	$(document).ready(function() {
+		var requestMoreVideos = function(){
+			postWithJson("/getSaved", {"subreddit": null, "time": "all", "sort": "top"}, function(data) {
+				console.log(data.length);
+				console.log(data);
+
+				if(data.list_partial !== undefined && data.list_partial !== null){
+					$("#posts").html(data.list_partial);
+				}
+			});
+		};
+
+		var voteOnPost = function(row, dir){
+			row.data("vote", dir);
+			row.attr("data-vote", dir);
+			postWithJson("/vote", {"id": row.data("id"), "dir": dir}, function(data){
+				console.log(data);
+			});
+		};
+
+		$("#search").on("click", function (){
+			requestMoreVideos();
+		});
+
+		$("body").on("click", ".post-row .ups", function(evt) {
+			var row = $(evt.target).closest(".post-row");
+			if(row.data("vote") === 1){
+				voteOnPost(row, 0);
+			} else {
+				voteOnPost(row, 1);
+			}
+		});
+
+		$("body").on("click", ".post-row .downs", function(evt) {
+			var row = $(evt.target).closest(".post-row");
+			voteOnPost(row, 0);
+		});
+	});
+
+</script>
+<div class="card search-card">
+	<div class="card-header text-xs-center">
+		<div class="container-fluid">
+			<div class="col-md-4 col-xs-12">
+				<label class="col-xs-12" for="subreddit">Subreddit:</label>
+				<input type="text" class="col-xs-12 form-control" placeholder="Limit to a subreddit..." id="subreddit">
+			</div>
+			<div class="col-md-4 col-xs-12">
+				<label class="col-xs-12" for="sort">Sort Posts By:</label>
+				<select class="col-xs-12 form-control" id="sort">
+					<option value="top">Top</option>
+					<option value="hot">Hot</option>
+					<option value="new">New</option>
+					<option value="con">Controversial</option>
+				</select>
+			</div>
+			<div class="col-md-4 col-xs-12">
+				<label class="col-xs-12" for="search">Search:</label>
+				<button id="search" type="button" role="button" class="col-xs-12 btn btn-block btn-primary">Search Reddit Saved</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="results" class="card results-card">
+	<div class="card-header text-xs-center">
+		<h5 class="card-title">Search Results:</h4>
+	</div>
+	<div class="card-block">
+		<div id="posts" class="container-fluid">
+
+		</div>
+	</div>
+</div>
+{% endblock %}

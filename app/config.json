@@ -1,0 +1,24 @@
+{
+    "offline": false,
+	"auth_session_path": "app/auth_session.txt",
+    "cache_session_path": "app/cache_session.txt",
+	"client_id": "bvNOJpTCzZ9qYQ",
+	"client_secret": "wuW_nORfy4DZhmEhh4Hx6EGAQUo",
+	"redirect_uri": "http://localhost:5000/auth/authorize",
+	"user_agent": "ReddiSave1.0/python/script",
+	"log_requests": 2,
+    "scope": "identity history read edit submit subscribe vote",
+    "state": "posts",
+    "page": "posts",
+    "guid": null,
+    "refreshable": true,
+    "store_json_result": "true",
+    "session_keys": ["access_token", "refresh_token", "state", "page", "guid"],
+    "access_keys": ["access_token", "refresh_token", "scope"],
+    "content_params": {
+        "limit": 50,
+        "show": "all",
+        "time": "all",
+        "fetch": true
+    }
+}

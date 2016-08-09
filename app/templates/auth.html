@@ -1,0 +1,49 @@
+{% extends "base.html" %} {% block content %}
+<script type="text/javascript">
+	function parseVars(str) {
+		var arrs = {};
+		str.substr(1).split("&").forEach(function(item) {
+			(item.split("=")[0] in arrs) ? ret[item.split("=")[0]].push(item.split("=")[1]): arrs[item.split("=")[0]] = [item.split("=")[1]]
+		});
+		var ret = {};
+		$.each(arrs, function(index, value){
+			if (arrs.hasOwnProperty(index) && arrs[index].length > 0) {
+				ret[index] = arrs[index][0];
+			}
+		});
+		return ret;
+	};
+
+	//localhost:5000/auth#access_token=0COdH6Jd_DAkEAtJJyQiYw1ufow&token_type=bearer&state=186&expires_in=3600&scope=edit+flair+history+identity+read+subscribe+vote
+	$(document).ready(function() {
+		var searchVars = parseVars(location.search);
+		console.log(searchVars);
+
+		/*if(searchVars.code !== undefined && searchVars.code !== null){
+			var settings = {
+				url: "/setAuth",
+				data: JSON.stringify(searchVars),
+				method: "POST",
+				dataType: "json",
+		        contentType: "application/json"
+			};
+			$.ajax(settings).done(function(data){
+				console.log(data);
+				if(data["status"] === "success"){
+					window.location = data["redirect"];
+				}else{
+					window.alert("Ajax .done without status=success")
+				}
+			}).fail(function(data){
+				console.log("There was an error: ");
+				console.log(data);
+			});
+		}*/
+	});
+</script>
+<div class="container" id="authStats">
+	
+</div>
+
+
+{% endblock %}

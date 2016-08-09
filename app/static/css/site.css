@@ -1,0 +1,91 @@
+#content {
+	margin-top: 30px;
+}
+
+#content .panel-body{
+	text-align: center;
+	font-size: 18px;
+}
+
+#authButton {
+
+}
+
+#searchForm {
+	margin-top: -15px;
+}
+
+.post-title{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.post-row[data-vote="1"] .ups {
+	color: #FF8b60;
+}
+
+.ups {
+	color: #818a91;
+	margin-left: -20px;
+}
+
+.search-card {
+
+}
+
+body {
+	padding-top: 20px;
+}
+
+li.navbar-item {
+    margin-right: 20px !important;
+}
+
+.post-row .card-header {
+	min-height: 50;
+	padding-right: 0;
+}
+
+.post-row .card-block {
+	padding: 0;
+}
+
+.toggler {
+	width: 80px;
+	height: 40px;
+	margin-right: -20px;
+	margin-top: -10px;
+	line-height: 40px;
+}
+
+#searchForm .form-group {
+	font-size: 16px;
+	text-align: center;
+}
+
+.ghost-center {
+  position: relative;
+  max-height: 300px;
+}
+
+.ghost-center::before {
+  content: " ";
+  display: inline-block;
+  height: 50%;
+  width: 1%;
+  vertical-align: middle;
+}
+
+.ghost-center p {
+ 	display: inline-block;
+    vertical-align: middle;
+    width: 350px;
+    margin: 0;
+    padding: 10px;
+}
+
+.jumbotron {
+	overflow-y: auto;
+	margin: 30px;
+}
